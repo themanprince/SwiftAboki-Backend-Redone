@@ -10,10 +10,10 @@ class User { //gon be implementing builder pattern in this class
 	constructor(isSaved, obj) { //these 'posed to be passed by builder func
 		this.#isSaved = isSaved;
 			
-		if(obj) {
+		if(obj)
 			for(let key of Object.keys(obj))
 				this[key] = obj[key];
-		} else
+		else
 			throw new ReferenceError("How yu take instantiate User class sef? say you nur supply obj args... Better use builder my friend");
 	}
 	
@@ -27,7 +27,7 @@ class User { //gon be implementing builder pattern in this class
 				assert(/.+@.+\.(com|org|edu)/.test(arg)); //don't go on if we ain't got a valid email
 				
 				const queryStr = `
-					SELECT email, display_name
+					SELECT email, display_name, password, password_salt
 					FROM user_kini.users
 					WHERE email = $1;
 				`;
@@ -57,9 +57,9 @@ class User { //gon be implementing builder pattern in this class
 		this[prop] = value;
 	}
 	
-	canSave = () => {
+	get canSave() {
 		//cross-checking thru next
-		const neccessary = ["email", "display_name", "password", "password_salt"]; //for now
+		const neccessary = ["email", "display_name", "password"]; //for now
 
 		return hasNeccessaryProps(this, neccessary);
 	}
@@ -67,8 +67,8 @@ class User { //gon be implementing builder pattern in this class
 	save = () => {
 		//this handles both fresh saves and updates
 		return new Promise((res, rej) => {
-			if(! this.canSave())
-				return rej(Error("Cannot save User object to DB. it lacks some useful properties"));
+			if(! this.canSave)
+				return rej(Error("Cannot save or update User object to DB. it lacks some useful properties"));
 			//asin nur move forward at all
 			
 			//note the ! below
@@ -112,7 +112,7 @@ class User { //gon be implementing builder pattern in this class
 					email = $1,
 					display_name = $2,
 					password = $3,
-					password_salt = $4,
+					password_salt = $4
 					
 				WHERE email = $1;`;
 				pool.query(queryStr, [email, display_name, password, password_salt], (err, result) => {
@@ -166,6 +166,9 @@ class User { //gon be implementing builder pattern in this class
 			pool.query(queryStr, [email], (err, result) => {
 				if(err)
 					return rej(err);
+				
+				if(result.rows.length === 0)
+					return rej(new TypeError(`Email '${email}' don't exist in my DB`));
 				
 				const {password_salt, password} = result.rows[0];
 				bcryptjs.hash(pass, password_salt, (err, hash) => {
