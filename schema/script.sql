@@ -22,7 +22,8 @@ must havr an index... however, being primary keys, they already got unique index
 CREATE TABLE IF NOT EXISTS file.templates (
 	template_id SERIAL,
 	poster_email VARCHAR(40) NOT NULL,
-	file_id TEXT NOT NULL,
+	plp_id TEXT NOT NULL, /*for id of the actual plp file*/
+	thumbnail_id TEXT NOT NULL, /*for id of the image thumbnail file*/
 	template_title VARCHAR(60) NOT NULL,
 	template_description TEXT,
 	CONSTRAINT templates_pk PRIMARY KEY(template_id),
@@ -54,17 +55,8 @@ INSERT INTO user_kini.users (email, display_name, password, password_salt)
 VALUES ('themanprvnce@gmail.com', 'User X', 'randomkini', 'randomsalt');
 
 /*creating apparent templates post*/
-INSERT INTO file.templates (poster_email, file_id, template_title, template_description)
-VALUES ('themanprvnce@gmail.com', 'adaf3243q3asdfasdf23432434adfasdfauuu', 'Church Flyer', 'Church flyer in Pixellab');
+INSERT INTO file.templates (poster_email, plp_id, thumbnail_id, template_title, template_description)
+VALUES ('themanprvnce@gmail.com', 'adaf3243q3asdfasdf23432434adfasdfauuu', 'adaf3243q3asdfasdf23432434adfasdfauuu', 'Church Flyer', 'Church flyer in Pixellab');
 
-INSERT INTO file.templates (poster_email, file_id, template_title, template_description)
-VALUES ('themanprvnce@gmail.com', 'adaf3243q3asdfasdf23432434adfasdfauuu', 'Party poster', 'Party poster in Pixellab');
-
-/*adding keywords*/
-/*
-RIGHT NOW, I'M DOING IT HAND-BY-HAND, BUT THEN, I'M GON ADD ABSTRACTIONS IN MODEL CLASSES I'LL CREATE
-*/
-/*
-first one - church, flyer, pixellab, trending, cute, beautiful
-second one - party, flyer, pixellab, beautiful, rave
-*/
+INSERT INTO file.templates (poster_email, plp_id, thumbnail_id, template_title, template_description)
+VALUES ('themanprvnce@gmail.com', 'adaf3243q3asdfasdf23432434adfasdfauuu', 'adaf3243q3asdfasdf23432434adfasdfauuu', 'Party poster', 'Party poster in Pixellab');
