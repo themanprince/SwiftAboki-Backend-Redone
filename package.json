@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node node_modules/mocha/bin/mocha.js --timeout=30000",
-    "tsc": "node node_modules/typescript/bin/tsc --target es6 --module nodenext"
+    "test": "node node_modules/mocha/bin/mocha.js --timeout=30000 --require=\"./node_modules/ts-node/register\"",
+    "tsc": "node node_modules/typescript/bin/tsc --target es6 --module nodenext",
+    "ts-node": "node node_modules/ts-node/dist/bin.js"
   },
   "keywords": [
     "pixellab",
@@ -25,8 +26,11 @@
     "pg": "^8.11.3"
   },
   "devDependencies": {
+    "@types/mocha": "^10.0.6",
     "@types/node": "^20.10.4",
     "mocha": "^10.2.0",
+    "node-ts": "^6.0.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "undici-types": "^6.0.1"
   }
