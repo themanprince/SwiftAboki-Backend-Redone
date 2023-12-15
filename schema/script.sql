@@ -4,7 +4,7 @@ CREATE SCHEMA IF NOT EXISTS user_kini;
 
 CREATE TABLE IF NOT EXISTS user_kini.users (
 	email VARCHAR(40) NOT NULL,
-	display_name VARCHAR(40),
+	display_name VARCHAR(40) NOT NULL,
 	password TEXT NOT NULL,
 	password_salt TEXT NOT NULL,
 	CONSTRAINT users_pk PRIMARY KEY(email), /*adds unique index to it*/

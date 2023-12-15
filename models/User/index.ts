@@ -30,7 +30,7 @@ function doPasswordKini(this: AnyObj) { //action to be done before saving User f
 const myClassSpec: Arg = {
 	"colNames": ["email", "display_name", "password", "password_salt"],
 	"neccessary": ["email", "display_name", "password"],
-	"regexToVal": /.+@.+\.(com|org|edu)/,
+	"regexToVal": /.+@.+\.(com|org|edu)/, /*for email*/
 	"tableName": "user_kini.users",
 	"pKeyColName": "email",
 	"preSaveFunc": doPasswordKini

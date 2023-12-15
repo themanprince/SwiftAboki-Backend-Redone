@@ -4,7 +4,7 @@
   "description": "Its like Freepik but for pixellab templates and resources",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node node_modules/ts-node/dist/bin.js index.ts",
     "test": "node node_modules/mocha/bin/mocha.js --timeout=30000 --require=\"./node_modules/ts-node/register\"",
     "tsc": "node node_modules/typescript/bin/tsc --target es6 --module nodenext",
     "ts-node": "node node_modules/ts-node/dist/bin.js"
@@ -19,7 +19,9 @@
   "author": "the_man_prvnce",
   "license": "ISC",
   "dependencies": {
+    "@types/express": "^4.17.21",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-generator": "^4.16.1",
     "jsonwebtoken": "^9.0.2",

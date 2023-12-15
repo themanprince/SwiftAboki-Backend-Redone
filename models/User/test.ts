@@ -2,7 +2,7 @@
 const User = require(__dirname + "/index.ts");
 const pathToMyModules = __dirname + "/../../my_modules";
 const clearSchemaAfterTest = require(pathToMyModules + "/clearSchemaAfterTest");
-const compareObjs = require(pathToMyModules + "/compareOb.js");
+const compareObjs = require(pathToMyModules + "/compareObjs.ts");
 const pool = require(pathToMyModules + "/../Pool.js");
 const assert = require("assert");
 //type(s)

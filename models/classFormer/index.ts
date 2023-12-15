@@ -31,7 +31,6 @@ module.exports = function(classSpec: Arg) { //this arg(classSpec) right here, is
 			
 			for(let key of Object.keys(obj))
 				this[key] = obj[key];
-			
 		}
 		
 		static async builder(arg: (string | Record<string, any>)) {
@@ -46,7 +45,6 @@ module.exports = function(classSpec: Arg) { //this arg(classSpec) right here, is
 			
 			switch((typeof arg).toLowerCase()) {
 				case 'string':
-					
 					assert(regexToVal.test(<string>arg)); //user of factory function wants that the string passed(for loading kini from DB), must be of the form that matches regular expression regexToVal
 					
 					const queryStr:string = `
@@ -82,7 +80,8 @@ module.exports = function(classSpec: Arg) { //this arg(classSpec) right here, is
 		
 		get canSave() {
 			const {neccessary}:Arg = classSpec;
-			return hasNeccessaryProps(this, neccessary);
+			let has = hasNeccessaryProps(this, neccessary);
+			return has;
 			//a.k.a... we can save only if we have what we need to save with
 		}
 		
