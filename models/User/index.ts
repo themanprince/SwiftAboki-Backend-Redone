@@ -67,5 +67,14 @@ User.isPasswordValid = (email: string, pass: string) => new Promise((res, rej) =
 	});
 });
 
+//next, is a toJSON implementation to ensure that only non-sensitive data is sent when JSON.stringify is used
+User.prototype.toJSON = function() {
+	const {email, display_name} = this;
+	
+	return {
+		email, display_name
+	};
+}
+
 module.exports = User;
 export default User;

@@ -43,6 +43,21 @@ describe("User Model", () => {
 		});
 	});
 	
+	it("returns only non-sensitive data when use toJSON", async () => {
+		const email = "randomkinikur@gmail.com", password = "123", display_name = "mother fucker";
+		const testUser:AnyObj = await User.builder({
+			email, password, display_name
+		});
+		
+		//the json kini
+		const JSONString = JSON.stringify(testUser);
+		const parsedRes = JSON.parse(JSONString);
+		//first, assertingg that what should be in... is in
+		assert.ok(("email" in parsedRes) && ("display_name" in parsedRes));
+		//next, constraining what shouldn't be in
+		assert.ok( ! (("password" in parsedRes) || ("password_salt" in parsedRes)));
+	});
+	
 	describe("canSave", () => {
 		it("should return false for canSave() when ! canSave", async () => {
 			const testUser:AnyObj = await User.builder({

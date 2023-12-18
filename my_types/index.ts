@@ -13,3 +13,5 @@ export interface Arg { //the nature of the object I'm expecting in my factory fu
 
 //this is the type of result objects from DB queries
 export type AnyObj = Record<string, any>;
+
+export type NLO<T> /*Nested Literal Object*/ = Record<T, (T | Record<T, T>)>;
