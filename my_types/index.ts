@@ -11,7 +11,15 @@ export interface Arg { //the nature of the object I'm expecting in my factory fu
 };
 
 
-//this is the type of result objects from DB queries
 export type AnyObj = Record<string, any>;
 
-export type NLO<T> /*Nested Literal Object*/ = Record<T, (T | Record<T, T>)>;
+//for objects with "VALUES" of same data type.. I created it for purpose of destructing vars of same data type from an obj
+export type Obj<T> = {[key: string]: T}; //coulda just used Record
+
+//T is value type, K is key type... I switched in they positions
+export type NLO<T, K = string> /*Nested Literal Object*/ = Record<K, (T | Record<K, T>)>;
+
+export type Func<A, R = void> = {(arg: A): R;}; //A is arg, R is return type
+
+//an array of functions
+export type FuncArray<A, R> /*A is arg type for all funcs, R is the return type for all funcs*/ = {(x: A): R;}[];
