@@ -8,10 +8,11 @@ const client:Record<string, any> = createClient(REDIS_PORT, REDIS_HOST);
 client.on("connect", () => console.log("Redis idan is active!"));
 client.on("ready", () => console.log("Redis idan is ready ohh"));
 client.on("error", err => {
-	throw new Error("Redis Nur Connect Ohh, error is\n" + err);
+	console.error("Redis error!", err);
+	process.exit(2);
 });
 /*didn't want to explicitly throw the err since normal nodejs behavior required that the err be thrown if no error callback,
-however, redis does this thing were it continuously throws the error time-and-again.. I nur geh time to browse so I hope this solves it*/
+however, redis does this thing were it continuously throws the error time-and-again..*/
 
 const redisClientPromise /*IIFE*/ = (async () => await client.connect())();
 

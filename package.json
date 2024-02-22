@@ -4,7 +4,7 @@
   "description": "Its like Freepik but for pixellab templates and resources",
   "main": "index.js",
   "scripts": {
-    "start": "node node_modules/ts-node/dist/bin.js index.ts",
+    "start": "node node_modules/ts-node/dist/bin.js ./src/index.ts",
     "test": "node node_modules/mocha/bin/mocha.js --timeout=30000 --require=\"./node_modules/ts-node/register\"",
     "tsc": "node node_modules/typescript/bin/tsc --target es6 --module nodenext",
     "ts-node": "node node_modules/ts-node/dist/bin.js",
