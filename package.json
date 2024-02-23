@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node node_modules/ts-node/dist/bin.js ./src/index.ts",
-    "test": "node node_modules/mocha/bin/mocha.js --timeout=30000 --require=\"./node_modules/ts-node/register\"",
+    "test": "node --trace-warnings node_modules/mocha/bin/mocha.js --timeout=30000 --require=\"./node_modules/ts-node/register\"",
     "tsc": "node node_modules/typescript/bin/tsc --target es6 --module nodenext",
     "ts-node": "node node_modules/ts-node/dist/bin.js",
     "redis-server": "redis-server /data/data/com.termux/files/usr/etc/redis.conf"
