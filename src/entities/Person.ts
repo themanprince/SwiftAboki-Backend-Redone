@@ -4,7 +4,7 @@ import {Entity, PrimaryColumn, Column} from "typeorm";
 export class Person {
 	
 	@PrimaryColumn("varchar", {length: 50})
-	email!: string;
+	email: string;
 	
 	@Column("boolean")
 	is_verified: boolean = false;

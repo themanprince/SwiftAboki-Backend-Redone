@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {createValidator} from "express-joi-validation";
+import {createValidator} from "express-joi-validator";
 //other kini
 import {signup as signupSchema} from "../request-schemas";
 import validateSignUpDetails from "../middlewares/validateSignUpDetails";
