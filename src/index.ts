@@ -17,6 +17,7 @@ async function main() {
 	
 	app.use("/", routes);
 	
+	
 	app.listen(app.get("PORT"), () => console.log("Idan is active expressly"));
 	
   } catch (error) {
