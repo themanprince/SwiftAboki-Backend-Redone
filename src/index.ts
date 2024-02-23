@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import bodyParser from "body-parser";
+import routes from "./src/routes";
 
 //dotenv
 dotenv.config();
@@ -13,6 +14,8 @@ async function main() {
 	//express middlewares
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({"extended": false}));
+	
+	app.use("/", routes);
 	
 	app.listen(app.get("PORT"), () => console.log("Idan is active expressly"));
 	

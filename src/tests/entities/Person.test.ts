@@ -15,6 +15,7 @@ describe("Person", () => {
 	//will focus on details later
 	it("saves with no issue", async () => {
 		const person = new Person();
+		person.email = "test@gmail.com"
 		person.fname = "Test";
 		person.lname = "User";
 		person.mname = "MF";

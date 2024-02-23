@@ -1,10 +1,10 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryColumn, Column} from "typeorm";
 
 @Entity({schema: 'sa_data'})
 export class Person {
 	
-	@PrimaryGeneratedColumn()
-	person_id!: number;
+	@PrimaryColumn("varchar", {length: 50})
+	email!: string;
 	
 	@Column("boolean")
 	is_verified: boolean = false;
