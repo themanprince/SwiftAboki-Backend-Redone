@@ -2,5 +2,5 @@
 
 #/signup
 curl -X POST \
--d '{"password": "123", "fname":"login", "lname": "Prince", "email": "test", "gender": "M"}' \
+-d '{"password": "a123", "fname":"login", "lname": "Prince", "email": "test", "gender": "M"}' \
 http://localhost:8000/signup

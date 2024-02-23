@@ -1,8 +1,8 @@
 import Joi from "joi";
 
 const signupRequestSchema = Joi.object({
-    password: Joi.string().trim(true).required(),
-    email: Joi.string().trim(true).required(),
+    password: Joi.string().alphanum().trim(true).required(),
+    email: Joi.string().email().trim(true).required(),
     isVerified: Joi.boolean().required(), //users become verified after confirming emails
     fname: Joi.string().trim(true).required(),
     lname: Joi.string().trim(true).required(),

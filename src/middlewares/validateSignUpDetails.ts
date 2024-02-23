@@ -10,7 +10,7 @@ const validateSignUpDetails = addTryCatch(async (req, res, next) => {
 	//schema checking
 	const {error, value} = signupSchema.validate(req.body);
 	if(error)
-		return res.status(400).json({"error": error.details[0].message});
+		return res.status(400).json({"error": error});
 	
 	
 	const {email} = req.body;
