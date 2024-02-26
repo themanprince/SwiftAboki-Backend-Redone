@@ -6,6 +6,9 @@ export class Person {
 	@PrimaryColumn("varchar", {length: 50})
 	email: string;
 	
+	@Column("text")
+	password: string;
+	
 	@Column("boolean")
 	is_verified: boolean = false;
 	
@@ -17,19 +20,19 @@ export class Person {
 	
 	@Column("varchar", {length: 50})
 	lname: string;
-	
-	@Column("text", {nullable: false})
-	password: string;
-	
+
 	@Column("char", {length: 3})
-	country_id: string; //iso-code of the country
+	country: string; //iso-code of the country
 	
 	@Column("integer")
-	state_id: number;
+	state: number;
 	
 	@Column("integer")
-	city_id: number;
+	city: number;
 	
 	@Column("char", {length: 1})
 	gender: string; //e.g. 'M', 'F'
+	
+	@Column("varchar", {length: 15})
+	phone_no: string;
 }

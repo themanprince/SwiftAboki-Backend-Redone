@@ -30,30 +30,21 @@ interface userProps { //for checking what user lasses
 
 export default class User {
 	
-	/*protected allowedProps = {
-		"ownDetails": ["is_merchant"],
-		"personalDetails": ["email", "password", "is_verified", "fname", "lname", "mname", "country", "state", "city", "gender", "phone_no"]
-	};
-	*/
+	protected ourPrsn = new Person();
+
 	constructor(props: userProps) {
-		/*const allAllowedProps = Object.keys(allowedProps).reduce((allProps, propArr) => allProps.concat(propArr), []);
-		//didnt hard code the concatenation cus the keys may change tomorrow
-		*/
-		for(let propKey of Object.keys(props)) {
-			/*if(allAllowedProps.indexOf(propKey) < 0)
-				throw new SyntaxError(`SA - A prop you supplied, (${propKey}) is not supported`);
-				//'SA' is to denote error was thrown by SA dev
-			*/
-			
-			//adding user details to 'this'
-			this[propKey] = props[propKey];
-		}
+		for(let propKey of Object.keys(props).map(prop => prop.toLowerCase()))
+			this.ourPrsn[propKey] = props[propKey];
 		
 		
 		this.save = this.save.bind(this);
 	}
 	
-	save() {
+	async save() {
 		
+		const conn = await connectonPromise;
+		
+		await conn.manager.save(prsn);
+
 	}
 }

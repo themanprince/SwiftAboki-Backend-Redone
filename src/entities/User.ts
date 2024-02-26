@@ -3,10 +3,7 @@ import {Person} from "./Person";
 
 @Entity({schema: "sa_data"})
 export class User {
-	
-	@PrimaryColumn("varchar", {length: 50})
-	user_name!: string;
-	
+
 	@OneToOne(type => Person)
 	@JoinColumn()
 	personal_details: Person;
@@ -14,7 +11,7 @@ export class User {
 	@Column("boolean")
 	is_merchant: boolean = false;
 	
-	@Column("bytea")
+	@Column("bytea", {nullable: true})
 	profile_pic: Object;
 	
 	//TODO - create Account model to connect this mofo to

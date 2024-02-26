@@ -1,20 +1,14 @@
-import {Person} from "../entities/Person";
-import connectonPromise from "../services/ORMConnect";
+import User from "../models/User";
 
 export default async function signUp(req, res, next) {
-	const {email, password, fname, mname, lname, is_verified, gender} = req.body;
-	const prsn = new Person();
-	prsn.email = email;
-	prsn.password = password;
-	prsn.fname = fname;
-	prsn.mname = mname;
-	prsn.lname = lname;
-	prsn.gender = gender;
-	prsn.is_verified = is_verified;
-	
-	const conn = await connectonPromise;
-	
-	await conn.manager.save(prsn);
-	
-	console.log("saved ohh... thank God");
+	//const {email, password, fname, mname, lname, phone_no, is_verified, gender, country, state, city} = req.body;
+	//I expect the only content of req.body is user creation kini
+	try {
+		const user = new User(req.body);
+		await user.save();
+		res.status(200).send({"msg": "success"});
+	} catch(err) {
+		console.error("SA error occured, error is\n", err);
+		res.status(500).send({"error": err});
+	}
 }
