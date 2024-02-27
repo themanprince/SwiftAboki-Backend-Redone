@@ -7,10 +7,10 @@ const signupRequestSchema = Joi.object({
     fname: Joi.string().trim(true).required(),
     lname: Joi.string().trim(true).required(),
     mname: Joi.string().trim(true),
-    gender: Joi.string().length(1).required()
+    gender: Joi.string().length(1).required(),
+    phone_no: Joi.string().trim(true).required()
     /*
     I'll ignore the country and other props for now
-    until I have created their entity models
     */
 });
 

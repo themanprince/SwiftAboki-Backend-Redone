@@ -1,8 +1,9 @@
 import {Person} from "../entities/Person";
+import {User} from "../entities/User";
 import connectonPromise from "../services/ORMConnect";
+import {getConnection} from "typeorm";
 
-
-interface userProps { //for checking what user lasses
+interface userProps {
 	email: string;
 	
 	password: string;
@@ -30,21 +31,50 @@ interface userProps { //for checking what user lasses
 
 export default class User {
 	
-	protected ourPrsn = new Person();
+	protected ourUser = new User();
 
 	constructor(props: userProps) {
-		for(let propKey of Object.keys(props).map(prop => prop.toLowerCase()))
-			this.ourPrsn[propKey] = props[propKey];
+		for(let propKey of Object.keys(props))
+			this[propKey] = props[propKey];
 		
 		
 		this.save = this.save.bind(this);
 	}
 	
 	async save() {
+		const {email, password, is_verified, fname, mname, lname, country, state, city, gender, phone_no, is_merchant} = this;
 		
 		const conn = await connectonPromise;
 		
-		await conn.manager.save(prsn);
-
+		const userPersonalDetails = new Person();
+		
+		userPersonalDetails.email = email;
+		userPersonalDetails.password = password;
+		userPersonalDetails.is_verified = is_verified;
+		userPersonalDetails.fname = fname;
+		userPersonalDetails.mname = mname;
+		userPersonalDetails.lname = lname;
+		userPersonalDetails.country = country;
+		userPersonalDetails.state = state;
+		userPersonalDetails.city = city;
+		userPersonalDetails.gender = gender;
+		userPersonalDetails.phone_no = phone_no;
+		
+		
+		await conn.manager.save(userPersonalDetails);
+		
+		
+		this.ourUser.personal_details = userPersonalDetails;
+		this.ourUser.is_merchant = is_merchant;
+		
+		await conn.manager.save(this.ourUser);
+	}
+	
+	static async exists(email: string) {
+		const personRepo = getConnection().getRepository(Person);
+		
+		const exists = !!(await personRepo.findOne({email} as any));
+		
+		return exists;
 	}
 }
