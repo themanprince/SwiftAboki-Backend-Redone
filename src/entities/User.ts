@@ -1,10 +1,13 @@
-import {Entity, PrimaryColumn, Column, OneToOne, JoinColumn} from "typeorm";
-import {Person} from "./Person";
+import {Entity, PrimaryGeneratedColumn, PrimaryColumn, Column, OneToOne, JoinColumn} from "typeorm";
+import Person from "./Person";
 
 @Entity({schema: "sa_data"})
-export class User {
-
-	@OneToOne(type => Person)
+export default class User {
+	
+	@PrimaryGeneratedColumn()
+	user_id: number;
+	
+	@OneToOne(type => Person, {cascade: true})
 	@JoinColumn()
 	personal_details: Person;
 	

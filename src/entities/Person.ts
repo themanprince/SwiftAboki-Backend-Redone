@@ -1,7 +1,7 @@
 import {Entity, PrimaryColumn, Column} from "typeorm";
 
 @Entity({schema: 'sa_data'})
-export class Person {
+export default class Person {
 	
 	@PrimaryColumn("varchar", {length: 50})
 	email: string;

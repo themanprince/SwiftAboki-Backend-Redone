@@ -1,11 +1,12 @@
 import connectionPromise from "../../services/ORMConnect";
 import {getConnection} from "typeorm";
-import {Person} from "../../entities/Person";
+import {Person} from "../../entities/";
+import fillPerson from "../test-writing-assist-functions/fillPerson";
 import assert from "assert";
 
 describe("Person", () => {
 	
-	let connection;
+	let connection, email = "test@gmail.com";
 	
 	before(async () => {
 		connection = await connectionPromise;
@@ -15,21 +16,33 @@ describe("Person", () => {
 	//will focus on details later
 	it("saves with no issue", async () => {
 		const person = new Person();
-		person.email = "test@gmail.com"
-		person.fname = "Test";
-		person.lname = "User";
-		person.mname = "MF";
-		person.country_id = "NGA";
-		person.state_id = 1;
-		person.city_id = 1;
-		person.gender = "M";
-		person.password = "123";
+		person.email = email;
+
+		/*const {fname, mname, lname, country, state, city, gender, phone_no, password};
+		person.fname = fname;
+		person.lname = lname;
+		person.mname = mname;
+		person.country = country;
+		person.state = state;
+		person.city = city;
+		person.gender = gender;
+		person.password = password;
+		person.phone_no = phone_no;
+		*/
+		
+		fillPerson(person);
+		
 		await connection.manager.save(person);
 	});
 	
 	it("exists after creation", async () => {
-		const result = await connection.manager.find(Person);
+		const personRepo = connection.manager.getRepository(Person);
 		
-		assert.ok(result.length > 0);
+		const person = await personRepo.findOne({
+			where: {email}
+		});
+
+		assert.ok(!!person);
+		assert.equal(person.email, email);
 	});
 });

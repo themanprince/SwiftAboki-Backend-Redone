@@ -11,8 +11,14 @@
 //some needed modules
 const {EventEmitter} = require('events');
 const {stat, readdir, readFile} = require('fs/promises');
-//my.. Marijn's module
-const escapeRegexStr = require(__dirname + "/my_modules/escapeRegexStr");
+
+
+//following function takes a string that ossibly contains aa regex and escapes all the regex in it.. innit?
+//credit goes to Marijn Haverbeke, wuthor of boook, eloquentjs
+function escapeRegexStr(text) {
+	return text.replace(/[\\[.+*?(){|^$]/g, "\\$&");
+}
+
 
 const emitUsageError = new EventEmitter(); //more like DRY on suits
 
